@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SYSPWN Digital Vaccine Labs</title>
+  <meta name="description" content="SYSPWN — Digital Vaccine Labs. World-class vulnerability research, exploit development, firmware and binary security assessments, and software-based side-channel research."/>
+
+  <!-- Inter font (close match to Teamtailor's modern UI sans) -->
+<link rel="preload" as="font" href="assets/fonts/HuaweiSans-Regular.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="assets/fonts/HuaweiSans-Bold.woff2" type="font/woff2" crossorigin>
+
+  <style>
+  @font-face{
+  font-family: "HuaweiSans";
+  src: url("assets/fonts/HuaweiSans-Regular.woff2") format("woff2"),
+       url("assets/fonts/HuaweiSans-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "HuaweiSans";
+  src: url("assets/fonts/HuaweiSans-Bold.woff2") format("woff2"),
+       url("assets/fonts/HuaweiSans-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* (Optional IE fallback if you have .eot)
+@font-face{
+  font-family:"HuaweiSans";
+  src: url("assets/fonts/HuaweiSans-Regular.eot");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+*/
+
+    :root {
+      --brand: rgba(140,34,22,255);
+      --brand-contrast: #ffffff;
+      --surface: #ffffff;
+      --text-default: #0a0a0a;
+      --focus: rgba(255, 255, 255, 0.7);
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+body{
+  font-family: "HuaweiSans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--brand);
+  color: var(--brand-contrast);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis-weight: none; /* prevent fake bold */
+}
+
+    /* Wide layout with only small gutters */
+    .page {
+      width: 100%;
+      padding-left: clamp(16px, 2vw, 32px);
+      padding-right: clamp(16px, 2vw, 32px);
+      padding-bottom: 56px;
+      box-sizing: border-box;
+    }
+
+    header.site-header {
+      text-align: center;
+      padding-top: 28px;
+      padding-bottom: 8px;
+    }
+
+    header .logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 12px;
+      display: block;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(255,255,255,.08);
+      object-fit: cover;
+    }
+
+    .kicker {
+      font-weight: 600;
+      letter-spacing: .02em;
+      opacity: .9;
+      margin-top: 6px;
+      margin-bottom: 0;
+    }
+
+    h1.title {
+      font-size: clamp(28px, 5vw, 56px);
+      line-height: 1.1;
+      margin: 6px 0 12px;
+      font-weight: 700;
+    }
+
+    .cta-row {
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: #ffffff;
+      color: #0a0a0a;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 6px;
+    }
+
+    main { display: block; }
+
+    section { margin-bottom: 28px; }
+
+    h2, h3 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+
+    h2 { font-size: clamp(22px, 3.6vw, 32px); }
+    h3 { font-size: clamp(18px, 2.6vw, 24px); }
+
+    p {
+      margin: 8px 0 12px;
+      max-width: none; /* No column restriction: wide text as requested */
+    }
+
+    ul {
+      margin: 8px 0 12px 1.2em;
+    }
+
+    /* Contact form */
+    form.contact { 
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255,255,255,.18);
+      padding: 16px;
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      max-width: none;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+
+    .col-6 { grid-column: span 6; }
+    .col-12 { grid-column: span 12; }
+
+    @media (max-width: 800px) {
+      .col-6 { grid-column: span 12; }
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.96);
+      color: #111;
+      padding: 10px 12px;
+      box-sizing: border-box;
+      outline: none;
+      font: inherit;
+    }
+
+    textarea { min-height: 140px; resize: vertical; }
+
+    input:focus,
+    textarea:focus {
+      box-shadow: 0 0 0 3px var(--focus);
+      border-color: #fff;
+    }
+
+    .form-actions {
+      margin-top: 8px;
+    }
+
+    button[type="submit"] {
+      border: none;
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      background: #ffffff;
+      color: #000;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      filter: brightness(0.95);
+    }
+
+    /* White footer with small logo */
+    footer.site-footer {
+      background: var(--surface);
+      color: var(--text-default);
+      padding: 14px clamp(16px, 2vw, 32px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    footer .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    footer .brand img {
+      width: 32px; height: 32px; border-radius: 50%;
+    }
+
+    footer small { opacity: .75; }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="site-header" role="banner">
+      <img src="assets/syspwn-logo.png" alt="SYSPWN logo" class="logo" />
+      <p class="kicker">Actionable Vulnerability Research</p>
+      <h1 class="title">SysPWN Digital Vaccine Labs</h1>
+      <!-- Optional CTA mirroring the look-and-feel -->
+      <div class="cta-row">
+        <a class="cta" href="#contact">Work with SYSPWN</a>
+      </div>
+    </header>
+
+    <main id="content" class="content" role="main">
+      <section aria-labelledby="about">
+        <h2 id="about">SYSPWN research — digital vaccine labs</h2>
+        <p><strong>SYSPWN</strong> is a dedicated research center for world‑class vulnerability research projects. We deliver high‑quality security research services including, but not limited to:</p>
+        <ul>
+          <li>Vulnerability discovery across large code bases — both closed‑source and open‑source.</li>
+          <li>Binary assessments on Windows and *nix targets, firmware (RTOS &amp; Linux) audits, and Android platform security reviews.</li>
+          <li>World‑class research on <em>software‑based side‑channel attacks</em> and exploitation hardening bypasses.</li>
+        </ul>
+        <p><strong>Intro:</strong> I’m a security researcher based in Germany and the founder of SYSPWN. My work spans reverse engineering, exploit development, and applied cryptanalysis, with a focus on measurable impact and reproducible results for clients and the wider community.</p>
+      </section>
+
+      <section aria-labelledby="track">
+        <h2 id="track">Track record</h2>
+        <p>SYSPWN is proud to have successfully performed vulnerability detection on world‑class products, uncovering critical issues in <strong>Meta</strong> services, <strong>Linux</strong> components, modern <strong>web browsers</strong>, critical third‑party libraries, and well‑known real‑world firmware stacks.</p>
+      </section>
+
+      <section aria-labelledby="smcb">
+        <h2 id="smcb">SMCB — SYSPWN Month of Critical Bugs</h2>
+        <p>We are committed to performing vulnerability detection on critical software <strong>every month</strong> and sharing results with the community under the codename <strong>“SMCB”</strong> (<em>SYSPWN Month of Critical Bugs</em>). Our aim is simple: keep raising the bar and make the world safer.</p>
+      </section>
+
+      <section aria-labelledby="services">
+        <h2 id="services">Core services</h2>
+        <div class="grid">
+          <div class="col-6">
+            <h3>Offensive research</h3>
+            <ul>
+              <li>Zero‑day hunting in complex targets</li>
+              <li>Fuzzing at scale (in‑house harnesses and sanitizers)</li>
+              <li>Advanced exploitation on user‑ and kernel‑space surfaces</li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <h3>Assurance &amp; advisory</h3>
+            <ul>
+              <li>Threat modeling &amp; secure SDLC enablement</li>
+              <li>Binary &amp; firmware hardening reviews</li>
+              <li>Red‑team style code reviews and exploit reproduction</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact">Interested in testing the security of your products?</h2>
+        <p>Use the contact form below. We’ll get back to you with scopes, timelines, and a proposed methodology.</p>
+
+        <form class="contact" action="#" method="post" onsubmit="event.preventDefault(); alert('Thanks — your message has been captured locally. Hook this form up to your backend or a form service to receive submissions.');">
+          <div class="grid">
+            <div class="col-6">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="col-6">
+              <label for="email">Work email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="col-6">
+              <label for="org">Organization</label>
+              <input id="org" name="org" type="text" autocomplete="organization" />
+            </div>
+            <div class="col-6">
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text" />
+            </div>
+            <div class="col-12">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your product, targets, and goals..." required></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit">Send message</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="brand">
+      <img src="assets/syspwn-logo.png" alt="SYSPWN logo small">
+      <strong>SYSPWN</strong>
+    </div>
+    <small>&copy; 2025 SYSPWN — Digital Vaccine Labs. All rights reserved.</small>
+  </footer>
+</body>
+</html>
